@@ -118,7 +118,17 @@ app.get('/:slug', async (req, res) => {
 const port = process.env.PORT || 9000;
 app.listen(port, () => {
 	try {
- 		console.log(`Server running on ${port}`)
+ 		console.log(`Server running on http://localhost:${port}/`)
 	}
 	catch(err) { console.log(err) } 
 })
+
+
+
+
+
+
+// Deploying cmd : 
+// git add .
+// git commit -am "make it better"
+// git push heroku master

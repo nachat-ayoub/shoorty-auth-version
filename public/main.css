@@ -10,16 +10,16 @@ body {
 }
 .ar_text {
   font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+.textRight {
+  text-align: right;
 }
 .refresh_msg {
   width: 65vw;
   margin: 2rem 0 0.5rem 0;
   padding: 1.5rem 2rem;
-  border: 3px solid rgb(238, 49, 49);
-  background-color: rgb(224, 101, 101);
-  border-radius: 6px;
   font-size: 1.7rem;
-  color: rgb(255, 255, 255);
   text-align: center;
 }
 .timer-container {

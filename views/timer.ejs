@@ -50,27 +50,49 @@
   </p>
   <div class="ads">Ads</div>
   <div class="d-flex justify-content-center align-items-center flex-column my-3">
+        <!-- < msg > -->
+        <span dir="rtl" class="alert alert-warning ar_text textRight">
+
+          يرجى اختيار أحد الخيارات تحت كي تتجاوز الإختصار.
+          <br> 
+          <strong dir="rtl">
+            في حالة عدم اختيار أحد الخيارات تحت سوف تتم إعادتك للصفحة السابقة.
+          </strong>
+    
+        </span>
+        <!-- </ msg > -->
+    
     <div class="timer-container ">
         <span id="timer" class="mt-2">5</span>
         <span class="seconds">Seconds</span>
     </div>
-    <a href="#getLink" class="wait-btn mt-4 btn btn-success btn-lg disabled"> wait... </a>
+    <a href="#getLink" class="wait-btn mt-4 btn btn-success btn-lg disabled ar_text"> 
+      انتظر...  
+    </a>
+
     <!-- Refresh Alert -->
-    <span dir="rtl" class="refresh_msg ar_text disabled d-none">
+    <span dir="rtl" class="alert alert-danger refresh_msg ar_text disabled d-none">
       
       سيتم إعادتك توجيهك للصفحة الرئيسية بعد 5 ثواني...
 
     </span>
     <!-- YT subs -->
-      <a class="btn btn-danger mt-4 mb-3" href="https://www.youtube.com/channel/UCmeSXbSLV3CK8A8u1rkk0dQ" target="_blank">Subscribe Please</a>
+      <a class="btn btn-danger mt-4 mb-3 ar_text" href="https://www.youtube.com/channel/UCmeSXbSLV3CK8A8u1rkk0dQ" target="_blank">
+        يرجى الاشتراك
+      </a>
     <!-- / YT subs -->
 
 
 
     <!-- Watch YT video -->
     
-    <span>Or</span>
-      <a id="yt_v" class="my-3 btn btn-warning font-weight-bold" href="https://www.youtube.com/watch?v=GGOsqQJ1Vis" target="_blank" rel="noopener noreferrer"> Watch Video (:</a>
+    <span class="ar_text
+    ">
+      أو
+    </span>
+      <a id="yt_v" class="my-3 btn btn-warning font-weight-bold ar_text" href="https://www.youtube.com/watch?v=GGOsqQJ1Vis" target="_blank" rel="noopener noreferrer"> 
+        شاهد فيديو لمدة 15 ثانية.
+      </a>
 
       
       
@@ -216,7 +238,7 @@
       //  Watch Checker :
       let watch_time = 10;
       // value * 5s
-      let lil_interval_time = 1;
+      let lil_interval_time = 10;
       // 15s
       let sec = lil_interval_time * 5;
 
@@ -254,10 +276,10 @@
       let secon;
       function left_time_counter() {
         secon = setInterval(() => {
-          waitBtn.innerText = "Hurry up! ("+sec+")";
+          waitBtn.innerText = "هيا أسرع ("+sec+")";
           if (sec == 0) {
             clearInterval(secon);
-            waitBtn.innerText = "time over x_x ("+sec+")";
+            waitBtn.innerText = "انتهى الوقت ستتم اعادتك";
             // refresh the page :
             
             refresh_btn.classList.remove("d-none")
@@ -273,24 +295,17 @@
       subs_checker().then(response => {
       curr_subs = response.subs;
       
-      console.log("My Subs : "+curr_subs); // 19
-        
+      console.log("My Subs : "+curr_subs); 
         
         // 1s interval
         let big_interval = setInterval(function(){
-          
-          // console.log(curr_subs);
-          // compare_subs(curr_subs);
-
           
           time--;
           if(time >= 0){
             timer.innerHTML = time;
           }
 
-
           let exe_time = 0;
-          console.log(`exe_time : ${exe_time}          time : ${time}`);
           
           if (time == 0) {
             // Hurry function
@@ -298,18 +313,16 @@
           }
           if (time <= 0) {
             
-
             // clear the big interval :
             clearInterval(big_interval);
 
-                
             // 5s interval
             let lil_interval = setInterval(function() { 
 
               // Subs conditions
               if ((time <= 0 && He_subs) || (time <= 0 && He_watched)) {
                 clearInterval(secon);
-                waitBtn.innerText = "Continue";
+                waitBtn.innerText = "الرابط جاهز";
                 waitBtn.classList.remove("disabled")
 
                 waitBtn.addEventListener("click", () => {
@@ -326,21 +339,15 @@
               exe_time++
               // compare subs :
               compare_subs(curr_subs);
-              console.log(`exe_time : ${exe_time}          time : ${time}`);
               // clear interval :
               if (exe_time == lil_interval_time) {
                 clearInterval(lil_interval);
-                console.log("done");
               }
             }, 5000);
           }
           
-          
-          
         }, 1000);
         
-
-
       });
  
     </script>
