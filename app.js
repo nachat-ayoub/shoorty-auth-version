@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.get("*", checkUser);
 // func :
 
-const testDb_uri = "mongodb://127.0.0.1:27017/testDB";
+const testDb_uri = process.env.testDb_uri;
 // connecting to db process.env.DB_URI
 mongoose
   .connect(process.env.DB_URI || testDb_uri, {
