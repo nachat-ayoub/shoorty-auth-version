@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/heade') -%>
+  <style>
+    body {
+      background-color: #1c1c1c !important;
+      color: #fff;
+      height: 100vh !important;
+    }
+    .container {
+      height: 70%;
+    }
+    .loginForm {
+      background-color: #343434;
+      width: 30rem;
+      min-height: 20rem;
+      height: 50vh;
+      border-radius: 5px;
+    }
+    .form-group {
+      width: 90%;
+    }
+
+    .loginForm #password,
+    .loginForm #username {
+      width: 100% !important;
+      border: none;
+      border-radius: 5px !important;
+      font-size: large;
+      outline: none;
+    }
+    .loginForm .form-group label {
+      font-size: large;
+    }
+    footer {
+      height: 100px !important;
+    }
+  </style>
+  <body>
+    <%- include('partials/nav') -%>
+    <div class="container d-flex justify-content-center align-items-center">
+      <form
+        class="
+          loginForm
+          d-flex
+          justify-content-center
+          align-items-center
+          flex-column
+        "
+      >
+        <div class="form-group">
+          <label for="email">Email :</label> <br />
+          <input
+            id="email"
+            required
+            class="mb-2 col form-controle py-2"
+            placeholder="*Email"
+            type="email"
+            name="email"
+          />
+          <div class="email error text-danger"></div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password :</label> <br />
+          <input
+            id="password"
+            required
+            class="mb-2 col form-controle py-2"
+            placeholder="*Password"
+            type="password"
+            name="password"
+          />
+          <div class="password error text-danger"></div>
+        </div>
+        <div class="form-group">
+          <input
+            class="mt-2 col form-controle py-2 btn btn-lg btn-outline-success"
+            value="Login"
+            type="submit"
+          />
+        </div>
+      </form>
+    </div>
+
+    <%- include('partials/footer') -%>
+    <!--  -->
+    <%-include('partials/bootstrap_scripts')-%>
+    <script>
+      const form = document.querySelector("form");
+      const emailError = document.querySelector(".email.error");
+      const passwordError = document.querySelector(".password.error");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        // reset errors
+        emailError.textContent = "";
+        passwordError.textContent = "";
+        // get values
+        const email = form.email.value;
+        const password = form.password.value;
+        try {
+          const res = await fetch("/login", {
+            method: "POST",
+            body: JSON.stringify({ email, password }),
+            headers: { "Content-Type": "application/json" },
+          });
+          const data = await res.json();
+          // console.log(data);
+          if (data.errors) {
+            emailError.textContent = data.errors.email;
+            passwordError.textContent = data.errors.password;
+          }
+          if (data.user) {
+            location.assign("/");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    </script>
+  </body>
+</html>

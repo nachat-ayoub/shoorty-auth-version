@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/heade') -%>
+  <style>
+    body {
+      background-color: #1c1c1c !important;
+      color: #fff;
+      height: 100vh !important;
+    }
+    .container {
+      height: 70%;
+    }
+    .loginForm {
+      background-color: #343434;
+      width: 30rem;
+      min-height: fit-content;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      border-radius: 5px;
+    }
+    .form-group {
+      width: 90%;
+    }
+
+    .loginForm #password,
+    .loginForm #c_password,
+    .loginForm #email,
+    .loginForm #username {
+      width: 100% !important;
+      border: none;
+      border-radius: 5px !important;
+      font-size: large;
+      outline: none;
+    }
+    .loginForm .form-group label {
+      font-size: large;
+    }
+    footer {
+      height: 100px !important;
+    }
+  </style>
+  <body>
+    <%- include('partials/nav') -%>
+    <div
+      class="
+        container
+        d-flex
+        justify-content-between
+        align-items-center
+        flex-column
+        mt-4
+      "
+    >
+      <form
+        class="
+          loginForm
+          d-flex
+          justify-content-center
+          align-items-center
+          flex-column
+        "
+      >
+        <div class="form-group">
+          <div class="err_msg"></div>
+          <label for="username">Username :</label> <br />
+          <input
+            id="username"
+            required
+            class="mb-2 col form-controle py-2"
+            placeholder="*Username"
+            type="text"
+            name="username"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email :</label> <br />
+          <input
+            id="email"
+            required
+            class="mb-2 col form-controle py-2"
+            placeholder="*Email"
+            type="email"
+            name="email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password :</label> <br />
+          <input
+            id="password"
+            required
+            class="mb-2 col form-controle py-2"
+            placeholder="*Password"
+            type="password"
+            name="password"
+          />
+        </div>
+        <div class="form-group">
+          <label for="c_password">Confirm Password :</label> <br />
+          <input
+            id="c_password"
+            required
+            class="mb-2 col form-controle py-2"
+            placeholder="*Confirm Your Password"
+            type="password"
+            name="c_password"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            class="mt-2 col form-controle py-2 btn btn-lg btn-outline-success"
+            value="Sign up"
+            type="submit"
+          />
+        </div>
+      </form>
+      <%- include('partials/footer') -%>
+    </div>
+    <%-include('partials/bootstrap_scripts') -%>
+    <script>
+      let Form = document.querySelector(".loginForm");
+      let err_msg = document.querySelector(".err_msg");
+
+      // Submitting
+      Form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // values :
+        let username = Form.username.value;
+        let email = Form.email.value;
+        let password = Form.password.value;
+        let c_password = Form.c_password.value;
+        try {
+          const res = await fetch("/signup", {
+            method: "POST",
+            body: JSON.stringify({ email, username, password, c_password }),
+            headers: { "Content-Type": "application/json" },
+          });
+          const data = await res.json();
+
+          if (data.errors) {
+            // console.log(data.errors);
+            if (data.errors.email) {
+              err_msg.innerText = data.errors.email;
+              err_msg.classList.add("alert");
+              err_msg.classList.add("alert-danger");
+            }
+            if (data.errors.password) {
+              err_msg.innerText = data.errors.password;
+              err_msg.classList.add("alert");
+              err_msg.classList.add("alert-danger");
+            }
+          } else if (data.user) {
+            // REMOVE ERRORS :
+            err_msg.classList.remove("alert-danger");
+            err_msg.classList.remove("alert");
+            // ADD SUCCESS MESSAGE :
+            err_msg.innerText = "Your Account Created Successfully!";
+            err_msg.classList.add("alert-success");
+            err_msg.classList.add("alert");
+            // REDIRECT TO HOME PAGE :
+
+            // location.assign("/");
+            setTimeout(() => {
+              window.location.href = "/";
+            }, 1000);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    </script>
+  </body>
+</html>

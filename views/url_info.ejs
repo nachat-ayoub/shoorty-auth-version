@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/heade') -%>
+  <style>
+    body {
+      /* background-color: #1c1c1c !important; */
+      /* color: #fff; */
+      height: 100vh !important;
+    }
+    .container {
+      height: 100vh !important;
+    }
+    footer {
+      height: 100px !important;
+    }
+  </style>
+  <body>
+    <%- include('partials/nav') -%>
+    <div
+      class="
+        container
+        d-flex
+        justify-content-center
+        align-items-center
+        flex-column
+      "
+    >
+      <table class="table table-dark table-striped table-bordered text-center">
+        <tr>
+          <td>Link</td>
+          <td>Clicks</td>
+          <td>Country</td>
+          <td>City</td>
+        </tr>
+        <tr>
+          <td><%= data.slug %></td>
+          <td><%= data.clicks %></td>
+        </tr>
+      </table>
+
+      <h3>Clicks Country</h3>
+      <table class="table table-dark table-striped table-bordered text-center">
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Clicks</th>
+          </tr>
+        </thead>
+        <% if ( data.countrys ){ data.countrys.forEach(e => { %>
+        <tr>
+          <th><%= e.country %></th>
+          <td><%= e.click %></td>
+        </tr>
+        <% })} %>
+        <tr>
+          <th>all</th>
+          <td><%= data.clicks %></td>
+        </tr>
+      </table>
+    </div>
+
+    <%- include('partials/footer') -%>
+    <!--  -->
+    <%-include('partials/bootstrap_scripts')-%>
+  </body>
+</html>

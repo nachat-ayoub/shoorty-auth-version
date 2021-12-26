@@ -4,16 +4,25 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: #fff !important;
+  background-color: rgb(223, 221, 221) !important;
   padding: 0;
   margin: 0;
+  min-height: 100vh;
 }
+
+table {
+  width: 98.5% !important;
+}
+
 .ar_text {
   font-family: "Cairo", sans-serif;
-  direction: rtl;
+  text-align: justify;
 }
 .textRight {
   text-align: right;
+}
+.mylink {
+  color: rgb(40, 133, 255);
 }
 .refresh_msg {
   width: 65vw;
@@ -51,4 +60,78 @@ body {
   color: #fff;
   height: 20rem;
   width: 90%;
+}
+nav ul {
+  flex-grow: 100;
+}
+nav ul .center_menu {
+  flex-grow: 100;
+}
+
+.username_mobile {
+  display: none;
+}
+.navbar-brand {
+  margin-right: 0;
+}
+
+table {
+  width: 99% !important;
+}
+.tableContainer::-webkit-scrollbar {
+  display: none;
+}
+.tableContainer {
+  height: 45vh;
+  /* border: red 2px solid; */
+  overflow-y: hidden;
+  overflow-y: scroll;
+  -webkit-box-shadow: 0px 1px 8px -2px #000000;
+  box-shadow: 0px 1px 8px -2px #00000063;
+}
+
+/* Mobile Screens */
+@media (max-width: 992px) {
+  nav ul .center_menu {
+    flex-direction: column !important;
+    padding: 0.5rem 0;
+  }
+  .username {
+    display: none;
+  }
+  .username_mobile {
+    display: block;
+  }
+
+  table.table {
+    width: 100% !important;
+  }
+}
+@media (max-width: 768px) {
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* yt info */
+.yt_info {
+  width: 100%;
+  padding: 2rem 0;
+}
+.yt_form {
+  width: 60vw;
+  min-width: 500px;
+}
+.yt_form .form-group {
+  width: 100%;
+}
+#ch_link {
+  outline: none;
+  border: none;
+  width: 100%;
+  border-radius: 4px;
+  padding: 0.8rem 1rem !important;
 }

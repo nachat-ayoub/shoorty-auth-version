@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Shoorty</a>
+  <div class="username_mobile text-center">
+    <% if (user) { %> <%= user.username %> <% } %>
+  </div>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <div class="d-flex justify-content-center align-items-center center_menu">
+        <li class="nav-item active">
+          <a class="nav-link" href="/"
+            >Home <span class="sr-only">(current)</span></a
+          >
+        </li>
+        <% if (user) { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/user/dashboard/<%= user._id %>"
+            >Dashboard</a
+          >
+        </li>
+        <% } %>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="/contact">Contact</a>
+        </li>
+      </div>
+      <% if (user) { %>
+      <li class="username nav-link"><%= user.username %></li>
+      <li class="nav-item">
+        <a class="nav-link btn px-4 ml-2 btn-success text-white" href="/logout"
+          >Logout</a
+        >
+      </li>
+      <% } else { %>
+
+      <li class="nav-item btn-signup">
+        <a class="nav-link btn px-4 ml-2 btn-outline-success" href="/signup"
+          >Sign up</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link btn px-4 ml-2 btn-success text-white" href="/login"
+          >Login</a
+        >
+      </li>
+
+      <% } %>
+    </ul>
+  </div>
+</nav>
