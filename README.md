@@ -1,0 +1,1 @@
+# shoorty-auth-version
