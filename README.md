@@ -15,8 +15,6 @@ Introducing **Shoorty** - a sleek link shortening website with a strong backend 
 - JSON Web Tokens (JWT)
 - EJS (Embedded JavaScript)
 
-![Shoorty](https://res.cloudinary.com/nachatayoub/image/upload/v1661107017/image_0265c96b34.png)
-
 Find the source code on [GitHub](https://github.com/nachat-ayoub/shoorty-auth-version).
 
 **Start Date:** 2022-07-21  
